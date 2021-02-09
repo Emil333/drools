@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings
+        xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+        version="2.1">
+
+    <entity class="org.drools.persistence.info.SessionInfo">
+        <table name="session_info"/>
+<!--        <convert converter="com.tech.drools.converter.ByteToLongConverter" attribute-name="rulesByteArray"/>-->
+        <attributes>
+            <id name="id">
+                <column name="id"/>
+                <generated-value generator="session_info_id_seq" strategy="SEQUENCE"/>
+                <sequence-generator name="session_info_id_seq" sequence-name="session_info_id_seq"/>
+            </id>
+            <basic name="lastModificationDate">
+                <column name="last_modification_date"/>
+            </basic>
+            <basic name="rulesByteArray">
+                <column name="rules_byte_array"/>
+                <lob/>
+            </basic>
+            <basic name="startDate">
+                <column name="start_date"/>
+            </basic>
+            <version name="version">
+                <column name="optlock"/>
+            </version>
+        </attributes>
+    </entity>
+</entity-mappings>

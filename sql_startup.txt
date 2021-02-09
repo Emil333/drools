@@ -1,0 +1,15 @@
+create table WORKITEMINFO_ID_SEQ (next_val bigint, id int primary key) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+create table SESSIONINFO_ID_SEQ (next_val bigint, id int primary key) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+create table hibernate_sequence (next_val bigint, id int primary key) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+
+create table sessioninfo (id bigint not null, lastModificationDate datetime, OPTLOCK integer, rulesByteArray tinyblob, startDate datetime, primary key (id)) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+
+create table user (id integer not null, email varchar(255), name varchar(255), primary key (id)) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+
+create table workiteminfo (workItemId bigint not null, creationDate datetime, name varchar(255), OPTLOCK integer, processInstanceId bigint, state bigint, workItemByteArray tinyblob, primary key (workItemId)) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+
+INSERT INTO SESSIONINFO_ID_SEQ (next_val, id) VALUES (1, 1);
+
+//optional
+create table SESSION_INFO_ID_SEQ (next_val bigint, id int primary key) engine=MyISAM WITH "ATOMICITY=TRANSACTIONAL_SNAPSHOT";
+INSERT INTO SESSION_INFO_ID_SEQ (next_val, id) VALUES (1, 1);

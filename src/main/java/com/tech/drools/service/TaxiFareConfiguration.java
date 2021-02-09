@@ -32,6 +32,12 @@ public class TaxiFareConfiguration {
 //    @Autowired
 //    private ISessionService iSessionService;
 
+    @Bean
+    public TaxiFareCalculatorService service(){
+        TaxiFareCalculatorService service = new TaxiFareCalculatorService(getKieBase(), getEnv());
+        return service;
+    }
+
     @PostConstruct
     private void init() {
         this.initDataSource();
@@ -100,7 +106,7 @@ public class TaxiFareConfiguration {
         ds.setAllowLocalTransactions(true);
 //        ds.getDriverProperties().put("user", "root");
 //        ds.getDriverProperties().put("password", "password");
-        ds.getDriverProperties().put("url", "jdbc:ignite:thin://localhost:10800/");
+        ds.getDriverProperties().put("url", "jdbc:ignite:thin://localhost/");
         ds.getDriverProperties().put("driverClassName", "org.apache.ignite.IgniteJdbcThinDriver");
         ds.init();
     }

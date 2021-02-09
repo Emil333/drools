@@ -23,28 +23,35 @@ public class TaxiFareCalculatorService {
 //    @Autowired
 //    private KieContainer kieContainer;
 
-    @Autowired
+    //    @Autowired
     private Environment environment;
 
 //    @Autowired
 //    private KnowledgeBase knowledgeBase;
 
-    @Autowired
+
     private KieBase kieBase;
 
-    @Autowired
-    private KieSession session;
+//    private KieSession session;
 
-    public Long calculateFare(TaxiRide taxiRide, Fare rideFare) throws NamingException, SystemException, NotSupportedException {
+    public TaxiFareCalculatorService(KieBase kieBase, Environment environment) {
+        this.kieBase = kieBase;
+        this.environment = environment;
+    }
 
-        StatefulKnowledgeSession kSession = JPAKnowledgeService.newStatefulKnowledgeSession(kieBase, null, environment);
-        int sessionId = kSession.getId();
 
-        kSession.setGlobal("rideFare", rideFare);
-        kSession.insert(taxiRide);
+    public Long calculateFare(Long kieSessionId, TaxiRide taxiRide, Fare rideFare) throws NamingException, SystemException, NotSupportedException {
+        StatefulKnowledgeSession kSession;
+        if (kieSessionId == null) {
+            kSession = JPAKnowledgeService.newStatefulKnowledgeSession(kieBase, null, environment);
+            kSession.setGlobal("rideFare", rideFare);
+            kSession.insert(taxiRide);
+        }else {
+            kSession = JPAKnowledgeService.loadStatefulKnowledgeSession(kieSessionId, kieBase, null, environment);
+        }
+        Long sessionId = kSession.getIdentifier();
         kSession.fireAllRules();
-//        session.dispose();
         System.out.println("!! RIDE FARE !! " + rideFare.getTotalFare());
-        return rideFare.getTotalFare();
+        return sessionId;
     }
 }

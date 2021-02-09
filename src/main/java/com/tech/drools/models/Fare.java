@@ -1,6 +1,8 @@
 package com.tech.drools.models;
 
-public class Fare {
+import java.io.Serializable;
+
+public class Fare implements Serializable {
 
     private Long nightSurcharge;
 
