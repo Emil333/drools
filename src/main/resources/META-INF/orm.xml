@@ -8,7 +8,7 @@
 
     <entity class="org.drools.persistence.info.SessionInfo">
         <table name="session_info"/>
-<!--        <convert converter="com.tech.drools.converter.ByteToLongConverter" attribute-name="rulesByteArray"/>-->
+        <!--        <convert converter="com.tech.drools.converter.ByteToLongConverter" attribute-name="rulesByteArray"/>-->
         <attributes>
             <id name="id">
                 <column name="id"/>
@@ -18,10 +18,10 @@
             <basic name="lastModificationDate">
                 <column name="last_modification_date"/>
             </basic>
-            <basic name="rulesByteArray">
-                <column name="rules_byte_array"/>
-                <lob/>
-            </basic>
+            <!--            <basic name="rulesByteArray">-->
+            <!--                <column name="rules_byte_array"/>-->
+            <!--                <lob/>-->
+            <!--            </basic>-->
             <basic name="startDate">
                 <column name="start_date"/>
             </basic>
